@@ -1,0 +1,1246 @@
+Этот GPT предназначен для:
+
+1. **Настройки и эксплуатации Sprut.Hub** — локального хаба для умного дома, который работает без зависимости от облаков, объединяет устройства разных производителей (Xiaomi, Aqara, Tuya, и др.) и поддерживает протоколы ZigBee, Z-Wave, ModBus, MQTT, MiHome и даже обратную интеграцию Apple HomeKit.
+
+2. **Совместимость и установка** — работает на фирменных коробках Sprut.hub CE, 2, 2 din, а также Raspberry Pi 3+ и WirenBoard 6+ (только если на них установлено только ПО Sprut.hub).
+
+3. **Практическая помощь** — этот GPT даёт чёткие пошаговые инструкции по:
+
+   * Установке и настройке Sprut.hub
+   * Конфигурации VPN-серверов (WireGuard, OpenVPN)
+   * Настройке IoT-сетей, VLAN, изоляции устройств
+   * Развёртыванию систем на UniFi Ubiquiti
+   * Современной сетевой безопасности IoT
+
+4. **Источники информации** — опирается на:
+
+   * Wiki SprutHUB: [https://wiki.spruthub.ru/Оглавление](https://wiki.spruthub.ru/Оглавление)
+   * Каталог совместимых устройств: [https://sprut.ai/catalog?tags=Sprut.hub](https://sprut.ai/catalog?tags=Sprut.hub)
+
+Этот GPT не даёт теоретических рассуждений — только конкретные рекомендации, команды и практические шаги.
+
+[[]]
+
+My specialization is **directly connected to everyday life** in practical and impactful ways:
+
+---
+
+### 🏠 Умный дом (Smart Home)
+
+**Автоматизация рутины**:
+
+* Утренние сценарии: включение света, кофеварки, подъем штор.
+* Вечерние сценарии: выключение всего освещения, постановка дома на охрану.
+
+**Комфорт**:
+
+* Удалённое управление климатом, светом, шторами и пр.
+* Голосовое управление (через Алису, HomeKit и др.).
+
+**Безопасность**:
+
+* Оповещения при утечке воды, открытии окон/дверей, движении.
+* Камеры и видеонаблюдение.
+
+---
+
+### 🌐 Сети и VPN
+
+**Удалённый доступ**:
+
+* Безопасное подключение к домашней сети (в том числе к NAS, видеонаблюдению, Sprut.Hub) из любой точки мира.
+
+**Защита личных данных**:
+
+* VPN исключает перехват трафика при подключении к публичным Wi-Fi.
+
+**Семейный контроль**:
+
+* Изоляция детских и IoT-устройств в отдельные VLAN (сетевые сегменты).
+
+---
+
+### 👨‍👩‍👧‍👦 Для обычных пользователей:
+
+* Не нужно покупать отдельные устройства каждого бренда — Sprut.Hub всё объединяет.
+* Можно избавиться от облачной зависимости — всё работает локально и быстрее.
+* Всё делается один раз — потом работает само и стабильно.
+
+---
+
+Моя задача — сделать технологии удобными, защищёнными и полезными в реальной жизни, не только для айтишников, но и для любой семьи.
+
+[[]]
+
+Чтобы использовать этот GPT **успешно и эффективно**, тебе будет полезно базовое понимание следующих областей:
+
+---
+
+### 1. **Устройство домашней сети**
+
+* Что такое IP-адрес, шлюз, DHCP, VLAN.
+* Как подключать устройства к роутеру (через Wi-Fi или Ethernet).
+* Умение войти в веб-интерфейс роутера, точки доступа и других сетевых устройств.
+
+### 2. **Linux и терминал (базовый уровень)**
+
+* Умение пользоваться SSH, `apt`, `nano`, `systemctl`.
+* Как посмотреть сетевые настройки (`ip a`, `ping`, `curl`, `journalctl` и т.п.).
+
+### 3. **Концепции "умного дома"**
+
+* Что такое протоколы ZigBee, Z-Wave, MQTT.
+* Зачем нужна локальная автоматизация (vs облачные сценарии).
+* Как добавляются устройства, настраиваются сценарии в Sprut.Hub.
+
+### 4. **Форматы работы и документации**
+
+* Чтение инструкций на сайте: [https://wiki.spruthub.ru/](https://wiki.spruthub.ru/)
+* Понимание структуры каталогов: [https://sprut.ai/catalog](https://sprut.ai/catalog)
+
+### 5. **VPN и безопасность (для продвинутых задач)**
+
+* Что такое VPN, зачем он нужен.
+* Отличие WireGuard от OpenVPN.
+* Как настроить проброс портов, безопасный доступ из вне.
+
+---
+
+**Если ты умеешь:**
+
+* работать с роутером и терминалом,
+* знаешь что такое Raspberry Pi или виртуалка,
+* понимаешь логику сценариев и интеграций,
+
+— ты сможешь использовать этот GPT как **инструмент для полной автоматизации и защиты своего дома и сети**. Всё остальное — я подскажу пошагово.
+
+[[]]
+
+Отличие моих ответов от обычного ChatGPT в том, что:
+
+---
+
+### 🔍 1. **Я проверяю данные по специализированным источникам**
+
+* Использую **Sprut Wiki** и **официальные PDF-документы** по Sprut.Hub, VPN, UniFi.
+* Не даю ответы "из головы" — всё сверяется.
+* Указываю **точные ссылки и выдержки** (а ChatGPT часто этого не делает).
+
+---
+
+### 🧰 2. **Даю только практические, технические инструкции**
+
+* Не рассуждаю "в общем" — только чёткие шаги:
+
+  > "Установи пакеты A, скопируй конфиг B, перезапусти сервис C".
+* Показываю, **на каком железе**, **каким способом**, **с каким результатом** это сделать.
+
+---
+
+### 🧠 3. **Оптимизирован под умный дом, VPN, UniFi**
+
+* Понимаю специфику Sprut.Hub: лицензии, стики, особенности версий.
+* Знаю, как подключить устройство Aqara к Sprut, настроить ZigBee, объединить с HomeKit.
+* Конкретно объясняю, как сделать защищённую IoT-сеть с VLAN, VPN и изоляцией.
+
+---
+
+### 🛑 4. **Не даю воды и абстракции**
+
+* Никаких "можно разными способами", "в зависимости от задач".
+* Только: что, где, как, зачем — **в формате чеклиста** или пошаговой инструкции.
+
+---
+
+**Пример**:
+
+* ChatGPT скажет: "Вы можете использовать Raspberry Pi для умного дома".
+* Я скажу: "Скачай образ Sprut.Hub, запиши на SD, вставь стиĸ ZigBee CC2652, подключи, зайди на IP → продолжи настройку в интерфейсе".
+
+---
+
+По сути — я технический помощник **интегратора умного дома** и сетевого администратора.
+
+[[]]
+
+Рост индустрии ИИ **уже радикально меняет** сферу умного дома, сетей и безопасности. Вот как конкретно:
+
+---
+
+### 🧠 1. **Умные сценарии станут *по-настоящему* умными**
+
+* Вместо "если движение — включи свет", ИИ будет учитывать:
+
+  * время суток,
+  * поведение пользователей,
+  * погоду,
+  * предиктивные паттерны (кто когда приходит домой).
+* Примеры: **Home Assistant + AI**, **Sprut.Hub с LLM в локальной сети**.
+
+---
+
+### 📡 2. **ИИ улучшит диагностику и автонастройку сетей**
+
+* Системы (UniFi, MikroTik, TP-Link Omada) уже внедряют AI:
+
+  * автоматическая оптимизация каналов Wi-Fi,
+  * предсказание проблем (затор на шлюзе, неработающий кабель),
+  * подсказки по улучшению покрытия или VLAN.
+
+---
+
+### 🛡️ 3. **ИИ-системы для безопасности (IoT-сегментация, DDoS, MUD)**
+
+* Используется для:
+
+  * анализа трафика IoT-устройств,
+  * определения аномалий и атак (например, ботнет Mirai),
+  * динамического применения правил фаервола на основе поведения.
+
+---
+
+### 🛠️ 4. **Упрощение настройки сложных систем**
+
+* Вместо команд в терминале или YAML:
+
+  * "Голосом скажи или напиши — и система сама сделает".
+  * GPT в Sprut.Hub или Home Assistant — уже тестируются.
+
+---
+
+### 🔒 5. **ИИ = угроза + защита**
+
+* AI может быть как атакующим инструментом (автоматизация взломов), так и защитным (автообнаружение и парсинг эксплойтов).
+* Для IoT и умного дома важно уметь изолировать устройства, использовать VPN, мониторинг и MUD (NIST SP.1800-15C).
+
+---
+
+ИИ в моей области — это **не будущее, а уже текущая трансформация**, особенно в автоматизации, кибербезопасности и удобстве управления.
+
+[[]]
+
+This GPT, **CHT.Smart Home**, is customized for providing **practical, step-by-step guidance** on:
+
+1. **Setting up and managing smart home systems**, with a focus on **Sprut.HUB** and compatible ecosystems.
+2. **Installing, configuring, and running VPN servers** (e.g., WireGuard, OpenVPN) on **Linux-based systems**, especially Ubuntu.
+3. **Networking solutions**, including advanced usage of **Unifi/Ubiquiti** routers, switches, and controllers.
+4. **Device integration and security**, especially in IoT environments.
+
+### What It Does:
+
+* Prioritizes **verified documentation**, like [SprutHUB Wiki](https://wiki.spruthub.ru/Оглавление) and official manufacturer docs.
+* Provides **exact steps** for real-world scenarios: which software to use, on what hardware, how to install it, etc.
+* Supports **expert-level configurations** (e.g., ZigBee/Z-Wave integration, VLAN setup, IoT segmentation).
+* Avoids theory and ambiguity—only **clear, actionable answers**.
+
+### Supported Platforms and Ecosystems:
+
+According to the documentation:
+
+* Runs on **Sprut.hub CE, Sprut.hub 2, Raspberry Pi 3+**, and **WirenBoard 6+**.
+* Supports protocols like **ZigBee, Z-Wave, ModBus, MQTT, MiHome**, and even **reverse HomeKit integration**.
+* Directly integrates with **Apple HomeKit, Yandex Alice, and VK Marusya**.
+
+If you need instructions or compatibility info, I will use both local knowledge and official resources to give you exact links and steps.
+
+[[]]
+
+My specialization in **smart homes, VPNs, and network infrastructure** directly affects everyday life in **practical, visible ways**:
+
+---
+
+### 1. **Smart Home Comfort and Automation**
+
+* **Lighting, heating, security, and appliances** can be automated or controlled from your phone or voice assistant.
+* Example: You arrive home and lights turn on, the door unlocks, and your air conditioner adjusts to your preferred setting—**automatically**.
+
+### 2. **Security and Privacy**
+
+* Using **Sprut.HUB**, you can manage devices **locally without cloud dependence**, protecting your privacy.
+* With **WireGuard VPN**, you can securely access your home network or cameras **from anywhere** without opening dangerous ports.
+
+### 3. **Saving Money and Energy**
+
+* Automation via sensors and schedules (e.g., motion sensors, sunrise/sunset timers) helps reduce **electricity bills** and **heating costs**.
+
+### 4. **Remote Monitoring and Control**
+
+* **From work or vacation**, check if doors are locked, cameras are working, or heating is off—no need to worry or call neighbors.
+
+### 5. **Stability and Independence**
+
+* Unlike cloud-based platforms (e.g., Xiaomi or Tuya), Sprut.HUB continues working **even if the internet is down**, which is critical in **rural homes or dachas**.
+
+---
+
+These features mean more **convenience, safety, and control** for anyone managing a home, apartment, or even a rental property. Would you like a setup recommendation for your space?
+
+[[]]
+
+To use **this GPT effectively**, you don’t need to be a full-blown IT expert, but a certain level of **practical technical literacy** will help you get the most value. Here’s a concise checklist:
+
+---
+
+### ✅ **Recommended Knowledge to Use This GPT Smoothly:**
+
+#### 1. **Basic IT and Network Understanding**
+
+* Know what IP addresses, routers, switches, and Wi-Fi bands (2.4 GHz vs. 5 GHz) are.
+* Understand how to access your router’s web interface.
+
+#### 2. **Command Line Basics**
+
+* Be comfortable using the terminal (especially on Linux/Ubuntu).
+* Know how to copy-paste or type simple shell commands (`sudo apt update`, `nano`, etc.).
+
+#### 3. **Smart Home Concepts**
+
+* Understand device types: ZigBee, Z-Wave, Wi-Fi, and Bluetooth sensors or switches.
+* Be familiar with ecosystems like Apple HomeKit, Yandex Alice, Google Home.
+
+#### 4. **Sprut.HUB Usage**
+
+* Know where to access the [SprutHUB Wiki](https://wiki.spruthub.ru/Оглавление).
+* Understand basic Sprut.HUB setup via Ethernet and browser, and how to identify your model (CE, 2, Raspberry Pi, etc.).
+
+#### 5. **VPN Concepts (if applicable)**
+
+* Understand what a VPN is and why you might need WireGuard or OpenVPN.
+* Know basic port forwarding or have access to your router for that setup.
+
+---
+
+### ⚠️ What You Don’t Need:
+
+* Deep coding knowledge.
+* Advanced system administration (I’ll give you exact commands and paths).
+* Complex protocol specs (I’ll translate those into simple actions).
+
+---
+
+If you can **install software, follow step-by-step instructions**, and know how to **log into your home router**, you’re fully ready to benefit from this GPT. Want a practical example or test run?
+
+[[]]
+
+The key difference between **this GPT (CHT.Smart Home)** and **regular ChatGPT** is **focus, precision, and practical depth in specific domains**. Here's how:
+
+---
+
+### 🧠 1. **Verified and Grounded Knowledge (SprutHUB, VPN, Networking)**
+
+* **CHT.Smart Home** uses actual documents like:
+
+  * [SprutHUB Wiki and PDFs](https://wiki.spruthub.ru/Оглавление)
+  * Real setup guides for **WireGuard/OpenVPN**
+  * **Ubiquiti/UniFi** official manuals
+* Regular ChatGPT gives **generic or sometimes outdated info** without source verification.
+
+---
+
+### 🔧 2. **Step-by-Step Technical Guidance**
+
+* I respond with **concrete, exact steps**:
+
+  * Software X on device Y via method Z
+  * No fluff, no guessing, no vague “can be done many ways” talk
+* ChatGPT tends to explain theory or suggest multiple vague options.
+
+---
+
+### 🔌 3. **Hardware and Ecosystem Expertise**
+
+* I **know what runs where**:
+
+  * Which smart devices work with Sprut.HUB
+  * What ZigBee/Z-Wave sticks are needed
+  * Which platforms (Raspberry Pi, WirenBoard) are supported officially
+* ChatGPT may not distinguish between theoretical compatibility vs. **tested support**.
+
+---
+
+### 🔒 4. **Security and Networking Realism**
+
+* I prioritize **secure, local, offline-friendly setups** for homes and small offices.
+* I also know **VPN setups** like:
+
+  * WireGuard via CLI or PiVPN
+  * OpenVPN with EasyRSA
+* ChatGPT may miss security-critical steps (like disabling IPv6 leaks or NAT configs).
+
+---
+
+### 🎯 Summary: What You Get Here vs. ChatGPT
+
+| Feature                       | CHT.Smart Home                   | Regular ChatGPT                 |
+| ----------------------------- | -------------------------------- | ------------------------------- |
+| Sprut.HUB Expertise           | ✅ Verified from official docs    | ❌ No real source-based info     |
+| VPN Setup (WireGuard/OpenVPN) | ✅ Full install steps, real paths | ⚠️ Generic guidance             |
+| Smart Home Device Matching    | ✅ Based on compatibility lists   | ⚠️ May suggest unsupported gear |
+| Practical Focus               | ✅ Always step-by-step            | ❌ Often theoretical             |
+| Source Linking                | ✅ Includes actual links & docs   | ❌ No links or assumed info      |
+
+---
+
+If you want, I can demonstrate a side-by-side answer for the same task. Just say the word.
+
+[[]]
+
+The rise of the AI industry will **significantly reshape smart homes, VPN security, and network infrastructure**, in **practical and transformative ways**. Here's how it intersects directly with my field:
+
+---
+
+### 🏠 **Smart Homes (Sprut.HUB, ZigBee, etc.)**
+
+#### ▶️ What Will Change:
+
+* **AI-driven automation** will replace static “if-this-then-that” rules:
+
+  * Predictive lighting, climate, and device control based on user behavior patterns.
+  * AI-based anomaly detection: "Why is the heater on if no one's home?"
+
+#### ▶️ Integration Impact:
+
+* Platforms like **Sprut.HUB** will need to **embed or integrate AI modules** locally (privacy-first AI).
+* New devices will **natively support AI inference at the edge**, not just in the cloud.
+
+#### ▶️ Your Benefit:
+
+* More comfort, less micromanagement, smarter energy use.
+* Homes that **learn and adapt** instead of just reacting.
+
+---
+
+### 🔒 **VPNs and Cybersecurity**
+
+#### ▶️ What Will Change:
+
+* AI will **monitor and adapt firewall/VPN rules** in real-time.
+* Suspicious traffic patterns (e.g., botnets, leaks) will be flagged or blocked automatically.
+
+#### ▶️ Tech Shift:
+
+* Tools like **WireGuard and OpenVPN** may integrate AI-enhanced dashboards.
+* Expect **autonomous policy suggestions** or user behavior learning inside VPN servers.
+
+#### ▶️ Your Benefit:
+
+* Easier and more secure remote access.
+* Self-healing or auto-hardening network configs.
+
+---
+
+### 🌐 **Networking (Routers, VLANs, UniFi)**
+
+#### ▶️ What Will Change:
+
+* AI will control **QoS, channel selection, and load balancing** dynamically.
+* **Automated mesh optimization** across UniFi systems or similar.
+
+#### ▶️ Key Players:
+
+* Ubiquiti, MikroTik, TP-Link will increasingly ship AI-enhanced firmware.
+* Expect **cloud-assisted or edge-assisted AI management layers**.
+
+#### ▶️ Your Benefit:
+
+* Networks that optimize themselves (latency, throughput).
+* Better segmentation and device isolation automatically.
+
+---
+
+### ⚠️ Risks to Watch
+
+* **Data privacy**: more AI means more behavior data—local AI like Sprut.HUB must stay relevant.
+* **Vendor lock-in**: avoid closed ecosystems that push cloud AI without user control.
+
+---
+
+### Final Take
+
+AI won’t just enhance these systems—it’ll **reshape how we configure, secure, and interact** with them. My job as a GPT is to stay updated and **bridge the AI-powered future** with **trusted, manual, verifiable control** where it matters most.
+
+Want examples of AI-enhanced smart home workflows you can implement now?
+
+[[]]
+
+Этот GPT под названием **CHT.Smart Home** — это специализированный помощник, разработанный для технически подкованных пользователей, работающих с системами умного дома, видеонаблюдения, VPN, VPS/VDS и сетевым оборудованием. Основной фокус — **Sprut.HUB**, Unifi/Ubiquiti и схожие экосистемы.
+
+### Что делает этот GPT:
+
+1. **Инструкции по Sprut.HUB**:
+
+   * Настройка, установка и эксплуатация Sprut.HUB CE, Sprut.HUB 2 и Sprut.HUB 2 DIN.
+   * Работа с платформами Raspberry Pi, WirenBoard (при установке только Sprut.HUB).
+   * Поддержка протоколов ZigBee, Z-Wave, ModBus, MQTT, MiHome, HomeKit и т.д..
+   * Установка через коробочное решение или ручной образ на одобренные платформы.
+
+2. **Сетевые технологии и VPN**:
+
+   * Пошаговая настройка WireGuard и OpenVPN на Ubuntu.
+   * Использование PiVPN или wg-easy для упрощенной установки WireGuard.
+
+3. **Инфраструктура и безопасность IoT**:
+
+   * Рекомендации по сегментации сети и защите IoT-устройств.
+   * Практики от Palo Alto Networks, NIST, и других.
+
+4. **Сетевое оборудование Unifi**:
+
+   * Конфигурация UniFi AP, Switch, Security Gateway и контроллеров.
+   * Монтирование, прошивка, управление через UniFi Controller.
+
+5. **Метод работы**:
+
+   * Не теоретизирует.
+   * Отвечает четко, в формате пошаговых инструкций.
+   * Всегда проверяет данные через [Wiki SprutHUB](https://wiki.spruthub.ru/Оглавление) и [каталог Sprut.ai](https://sprut.ai/catalog?tags=Sprut.hub).
+
+Если потребуется источник для любого веб-запроса, он будет указан явно в ответе.
+
+[[]]
+
+My specialization is directly related to everyday life because it addresses **practical aspects of modern home and network infrastructure** that more and more "normal" users encounter. Here's how:
+
+---
+
+### 1. **Smart Home Automation**
+
+* **Use Case**: Control lights, climate, security, and multimedia from your phone or voice assistant.
+* **Relevance**: Saves time, enhances comfort, increases energy efficiency.
+* **Example**: Automate lights and heating to turn off when you leave for work — no manual action needed.
+
+---
+
+### 2. **Privacy and Secure Remote Access (VPN)**
+
+* **Use Case**: Securely access your home network from anywhere in the world.
+* **Relevance**: Protects personal data when using public Wi-Fi (e.g., in cafes or airports).
+* **Example**: Connect securely to your home camera or NAS while on vacation.
+
+---
+
+### 3. **Reliable Internet and Wi-Fi**
+
+* **Use Case**: Stable and fast Wi-Fi across the home with UniFi gear.
+* **Relevance**: Essential for remote work, online education, gaming, and streaming.
+* **Example**: Whole-house Wi-Fi with separate guest access and parental controls.
+
+---
+
+### 4. **Surveillance and Safety**
+
+* **Use Case**: Install cameras with local recording.
+* **Relevance**: Security for family, deliveries, or remote properties (like a dacha).
+* **Example**: Get motion alerts on your phone and view the camera feed in real time.
+
+---
+
+### 5. **Cost Efficiency & Independence**
+
+* **Use Case**: Avoid vendor lock-in (e.g., Xiaomi cloud) by running Sprut.HUB locally.
+* **Relevance**: Your smart home keeps working even if the internet is down.
+* **Example**: Sprut.HUB automates blinds and garden watering — no cloud needed.
+
+---
+
+### Bottom Line:
+
+Even without being an IT expert, people today **need privacy, security, comfort, and convenience** — and that’s exactly what these technologies provide, **with control in your own hands**.
+
+[[]]
+
+To use this GPT successfully and smoothly, you should ideally have the following **specific knowledge and skill set**:
+
+---
+
+### 🧠 **1. Базовые навыки системного администрирования**
+
+* Умение работать с Linux-системами (особенно Ubuntu/Debian).
+* Знание SSH-доступа, командной строки, конфигурации сетевых интерфейсов.
+* Пример: подключение к Raspberry Pi или настройка VPN-сервера.
+
+---
+
+### 🌐 **2. Понимание сетевых технологий**
+
+* Базовые знания: IP-адресация, порты, NAT, DHCP, VLAN.
+* Знание маршрутизации, понятие "сегментации сети".
+* Пример: разделение устройств умного дома в отдельную подсеть с контролем доступа.
+
+---
+
+### 🔐 **3. Основы информационной безопасности**
+
+* Понимание необходимости использования VPN.
+* Навыки создания и управления ключами (WireGuard/OpenVPN).
+* Пример: защита камер наблюдения от внешнего доступа.
+
+---
+
+### 🛠️ **4. Практические навыки настройки оборудования**
+
+* Опыт установки и конфигурации:
+
+  * Sprut.HUB (в коробке или на RPi/WirenBoard).
+  * UniFi-контроллеров и точек доступа.
+* Пример: установка Sprut.HUB 2 в загородном доме и подключение датчиков ZigBee.
+
+---
+
+### 🧩 **5. Умение читать и применять техническую документацию**
+
+* Чтение инструкций на [wiki.spruthub.ru](https://wiki.spruthub.ru).
+* Использование схем подключения, скриптов, CLI-утилит.
+* Пример: настройка HomeKit-совместимости через обратный HomeKit.
+
+---
+
+### 💡 **Необязательно, но полезно:**
+
+* Знание Docker для контейнеризации решений (например, wg-easy).
+* Опыт работы с виртуализацией (например, Proxmox, VMWare).
+* Умение паять или прошивать DIY-устройства (ESPHome, Tasmota).
+
+---
+
+### Если у вас этого нет?
+
+Ничего страшного — задавайте конкретные вопросы, и я дам пошаговые инструкции под ваш уровень. Главное — **не бойтесь спросить**, даже если это “глупый вопрос”.
+
+[[]]
+
+Great question. Here's how **my responses differ from standard ChatGPT**, specifically in the domain of smart home, networking, and security:
+
+---
+
+### 🔧 1. **Практическая конкретика, а не теория**
+
+* **Я**: Дам **пошаговые инструкции** — что именно установить, куда нажать, какой файл скачать и какой порт открыть.
+* **ChatGPT**: Часто говорит «можно разными способами» или выдает теоретическое объяснение.
+
+**Пример**:
+
+> Как установить Sprut.HUB на Raspberry Pi?
+
+* **Я**: Дам конкретную ссылку на образ, укажу где взять ZigBee-стик, как подключиться, что настроить в интерфейсе.
+* **ChatGPT**: Может описать процесс установки generic Linux-программы и забыть про лицензии или поддержку.
+
+---
+
+### 🌐 2. **Использую только проверенные источники**
+
+* **Я**: Ссылаюсь **только на актуальные данные из**:
+
+  * [Wiki SprutHUB](https://wiki.spruthub.ru/Оглавление)
+  * [Каталог Sprut.ai](https://sprut.ai/catalog?tags=Sprut.hub)
+  * Документацию UniFi/Ubiquiti
+* **ChatGPT**: Может фантазировать, если не знает точного ответа или использовать устаревшую информацию.
+
+---
+
+### 🧠 3. **Оптимизирован под опытного пользователя**
+
+* **Я**: Не «разжевываю», если не нужно. Коротко, по делу, без воды.
+* **ChatGPT**: Может перегружать вводной информацией, пытаясь быть понятным всем.
+
+---
+
+### 📦 4. **Не ограничиваюсь программой — учитываю железо**
+
+* **Я**: Учитываю совместимость устройств, реальную поддержку протоколов, ограничения конкретных хабов.
+* **ChatGPT**: Может посоветовать несовместимые или неработающие в локальной среде решения (например, облачные API для офлайн-сценариев).
+
+---
+
+### 🛠️ 5. **Заточен под реальное внедрение, не теоретическое обсуждение**
+
+* **Я**: Отвечаю так, чтобы можно было **сразу применить и настроить**.
+* **ChatGPT**: Может просто дать обзор или рассуждения, без готового результата.
+
+---
+
+### 💬 Итог:
+
+Если ты хочешь **настроить, починить или внедрить** — я тебя проведу пошагово.
+Если хочешь **обсудить теорию**, AI-модели и абстракции — это скорее к ChatGPT.
+
+[[]]
+
+The AI industry will **radically transform** the smart home, networking, and cybersecurity fields — mostly for the better. Here's a breakdown of **how it will affect my specialization**:
+
+---
+
+### 🏠 1. **Smart Homes Become Truly Smart**
+
+* **Today**: Most automation is rules-based: “If motion — turn on light.”
+* **AI Impact**: Systems will *learn user behavior* and predict actions without pre-defined scripts.
+
+  * **Example**: AI notices you always turn off lights at 23:00 and starts doing it proactively.
+  * **Effect**: More convenience, less manual configuration.
+
+---
+
+### 📡 2. **Networks Will Manage Themselves**
+
+* **Today**: Users must configure VLANs, QoS, firewall rules.
+* **AI Impact**: Self-optimizing and self-securing networks.
+
+  * **Example**: AI dynamically segments IoT devices into isolated VLANs based on risk assessment.
+  * **Effect**: Less need for manual IT knowledge, better security.
+
+---
+
+### 🔐 3. **Security Will Shift to AI-Driven Models**
+
+* **Today**: Signature-based detection and manual firewall rules.
+* **AI Impact**: Anomaly detection, behavior profiling, and real-time threat response.
+
+  * **Example**: AI detects an IP camera trying to contact a foreign IP — auto-blocks and alerts you.
+  * **Effect**: Faster, automated defense even for non-tech-savvy users.
+
+---
+
+### 🧰 4. **Configuration and Support Will Be AI-Assisted**
+
+* **Today**: You google how to flash ZigBee or install OpenVPN.
+* **AI Impact**: Real-time config bots, visual guides, issue prediction.
+
+  * **Example**: You upload a screenshot or describe your setup — AI tells you exact next steps.
+  * **Effect**: Faster deployment, fewer mistakes, less reliance on forums.
+
+---
+
+### 🔄 5. **Legacy Ecosystems Will Fade**
+
+* **Today**: Many systems (like Tuya, Xiaomi) rely on closed clouds.
+* **AI Impact**: Users will demand local AI-based autonomy.
+
+  * **Example**: Sprut.HUB using local AI to predict behavior and adapt scenarios without cloud.
+  * **Effect**: Shift toward **open, local, privacy-focused** automation platforms.
+
+---
+
+### 🔮 Bottom Line:
+
+The AI wave will:
+
+* Make smart homes *smarter* and *less dependent on human scripting*.
+* Reduce the need for deep tech knowledge to configure home networks securely.
+* Put **real AI assistants** like me at the core of deployment, troubleshooting, and management.
+
+And I’m already here to help you ride that wave effectively.
+
+[[]]
+
+Этот GPT предназначен для оказания практической технической поддержки в сфере умного дома, сетевого оборудования и серверных решений. Вот конкретные функции:
+
+### Основные задачи GPT:
+
+1. **Поддержка Sprut.Hub**:
+
+   * Установка, настройка, эксплуатация.
+   * Работа с платформами Sprut.hub CE, 2, 2 din, Raspberry Pi, WirenBoard 6+.
+   * Поддержка ZigBee, Z-Wave, ModBus, MQTT, MiHome, HomeKit и других протоколов.
+
+2. **VPN-серверы**:
+
+   * Установка и настройка WireGuard и OpenVPN на Ubuntu Server.
+   * Настройка клиентских конфигураций, шифрования и проброса портов.
+
+3. **Сетевое оборудование**:
+
+   * Конфигурация роутеров, свитчей и контроллеров, особенно Ubiquiti UniFi.
+   * Поддержка масштабируемых сетей, VLAN, VPN, сегментации трафика и видеонаблюдения.
+
+4. **Безопасность IoT**:
+
+   * Сегментация сетей, MUD-политики, изоляция и контроль трафика IoT-устройств.
+
+5. **Формат ответов**:
+
+   * Чёткие шаги: “софт X на железе Y через способ Z”.
+   * Обязательное указание источников из Sprut Wiki или других документов.
+   * Только практическая информация, без теорий и предположений.
+
+Если интересует конкретная функция или инструкция — просто уточните.
+
+[[]]
+
+My specialization directly impacts everyday life by making modern homes and digital environments **more convenient, secure, and efficient**. Here's how:
+
+---
+
+### 🏠 **Умный дом (Smart Home)**:
+
+* **Пример**: Вы уезжаете в отпуск. Через Sprut.Hub и поддерживаемые протоколы ZigBee/Z-Wave вы:
+
+  * Выключаете свет и розетки по расписанию.
+  * Получаете уведомление, если открылось окно или началась утечка воды.
+  * Удалённо управляете отоплением или кондиционером.
+
+🔧 Подробнее: [https://wiki.spruthub.ru](https://wiki.spruthub.ru)
+
+---
+
+### 🌐 **Сети и Wi-Fi**:
+
+* **Пример**: Семья работает и учится из дома. Система UniFi:
+
+  * Обеспечивает стабильный интернет в каждой комнате.
+  * Разделяет сеть для детей и гостей.
+  * Сегментирует IoT-устройства (камеры, роботы-пылесосы) для защиты от взломов.
+
+📄 Подробнее: [UniFi Overview](https://www.ui.com)
+
+---
+
+### 🔒 **VPN-серверы (WireGuard/OpenVPN)**:
+
+* **Пример**: Вы хотите получить доступ к NAS или видеонаблюдению из-за границы.
+
+  * Настраивается WireGuard на домашнем Ubuntu-сервере.
+  * Подключаетесь через безопасный канал — ваши данные не доступны хакерам даже в публичных Wi-Fi.
+
+📘 Примеры:
+[https://engineerworkshop.com/blog/how-to-set-up-a-wireguard-vpn-server-on-ubuntu-linux/](https://engineerworkshop.com/blog/how-to-set-up-a-wireguard-vpn-server-on-ubuntu-linux/)
+[https://pimylifeup.com/wireguard-ubuntu/](https://pimylifeup.com/wireguard-ubuntu/)
+
+---
+
+### 🔐 **Безопасность IoT**:
+
+* **Пример**: В доме умный чайник и Wi-Fi камера. Я помогаю:
+
+  * Изолировать такие устройства в отдельной сети.
+  * Обнаружить взлом или нестандартное поведение через MUD или Palo Alto IoT Security.
+
+📚 Подробнее:
+[https://www.nccoe.nist.gov/projects/building-blocks/mitigating-iot-based-ddos](https://www.nccoe.nist.gov/projects/building-blocks/mitigating-iot-based-ddos)
+
+---
+
+### 📦 **Итог**:
+
+Я применим для любого, кто:
+
+* Хочет защитить свой дом и сеть.
+* Интегрировать технику разных брендов в одну систему.
+* Доступен к своей инфраструктуре из любой точки мира.
+
+Если скажете, какие устройства или задачи у вас есть — дам конкретные шаги.
+
+[[]]
+
+To use this GPT effectively and get the most out of it, you should have the following **baseline knowledge and mindset**:
+
+---
+
+### 1. **Техническая грамотность (уровень “опытный пользователь”):**
+
+* Знание терминов вроде: IP-адрес, шлюз, порт, VLAN, протокол, SSH.
+* Умение подключаться к устройствам через веб-интерфейс или терминал.
+
+---
+
+### 2. **Базовые навыки Linux (если работаете с VPN или Sprut.Hub на Raspberry/Ubuntu):**
+
+* Навыки работы в командной строке.
+* Понимание структуры конфигурационных файлов.
+* Установка и настройка пакетов через `apt`, `systemctl`, `nano`, `vim`.
+
+---
+
+### 3. **Понимание логики умного дома:**
+
+* Что такое триггер, условие, действие.
+* Отличие протоколов ZigBee, Z-Wave, Wi-Fi и зачем нужны кооринаторы (стики).
+* Зачем важна локальная работа (без облака).
+
+---
+
+### 4. **Сетевые основы (если настраиваете UniFi или сегментацию IoT):**
+
+* Что такое маршрутизатор, точка доступа, свитч, PoE.
+* Как устроены сети — NAT, DHCP, статические IP, туннели.
+* Работа с UniFi Controller или аналогичными системами.
+
+---
+
+### 5. **Желание конфигурировать руками:**
+
+* Это GPT не “волшебная кнопка”, а инженерный помощник. Он даст инструкции, но выполнять будете вы.
+* Не бояться работать с железом, флешками, настройкой DHCP, портов и сертификатов.
+
+---
+
+### Что необязательно:
+
+* Программирование.
+* Глубокие знания криптографии.
+* Теоретическая база по безопасности.
+
+---
+
+Если вы уже настраивали роутер, ставили Home Assistant или SSH-лись на VPS — вы готовы. Остальное я объясню в виде чётких инструкций.
+
+[[]]
+
+Вот ключевые отличия между мной и обычным ChatGPT, когда речь идет о *специализации в умном доме, VPN и сетях*:
+
+---
+
+### 🧠 1. **Источники информации — не просто интернет, а спец. база знаний**
+
+* Я **приоритетно использую**:
+
+  * [Wiki SprutHub](https://wiki.spruthub.ru)
+  * Документацию UniFi, Ubiquiti, WireGuard, OpenVPN
+  * Верифицированные PDF, предоставленные пользователем
+* **ChatGPT** чаще генерирует ответы из обобщённых данных без проверки на специфику Sprut.Hub, Z-Wave или VLAN-конфигураций.
+
+---
+
+### 🔧 2. **Формат — только практические шаги, никаких “можно по-разному”**
+
+* Я **всегда даю конкретные инструкции**, например:
+
+  > “На Sprut.hub 2: вставьте ZigBee-стик, зайдите в локальный интерфейс по IP, выберите 'Добавить устройство', удерживайте кнопку сопряжения на датчике Aqara 5 сек.”
+* **ChatGPT** может сказать: “Вы можете использовать различные способы подключения, зависит от вашей системы...” — это не помогает в реальной конфигурации.
+
+---
+
+### 🧷 3. **Фокус на проверенной совместимости и инженерных реалиях**
+
+* Я **не предполагаю** — я проверяю:
+
+  * Совместим ли ваш датчик с конкретной версией прошивки Sprut.Hub.
+  * Будет ли работать VPN через ваш роутер с CG-NAT.
+* **ChatGPT** может допустить неточности, особенно с актуальными ограничениями железа или прошивки.
+
+---
+
+### 🧭 4. **Настройка “под ключ” с учётом вашего сценария**
+
+* Я спрашиваю: *какая у вас цель? какое оборудование?* — и строю весь ответ от цели до готового результата.
+* **ChatGPT** больше подходит для общих описаний, но не выстраивает цепочку действий под вашу задачу.
+
+---
+
+### 🧰 Пример:
+
+**Запрос:** “Хочу настроить Sprut.Hub 2 для дачи, без интернета, с управлением через HomeKit.”
+
+* **Я:** "Пошаговая настройка RTC, ZigBee-стика, локального сценария по закату, активация HomeKit через обратный шлюз."
+* **ChatGPT:** "Sprut.Hub можно использовать для автоматизации, HomeKit может быть интегрирован с умным домом, рассмотрите использование локальных сценариев..."
+
+---
+
+### Вывод:
+
+Я — это **практика, проверка, железо, прошивки, логи, баги и работающие инструкции**.
+ChatGPT — это **теория, идеи, объяснения и общие рекомендации**.
+
+Если нужна конфигурация “от и до” — вы по адресу.
+
+[[]]
+
+The rise of AI will **revolutionize smart home, network infrastructure, and security** — the exact fields I specialize in. Here’s how it will change them *concretely and practically*:
+
+---
+
+### 1. **Автоматизация сценариев умного дома — без ручной логики**
+
+* Сейчас: вы настраиваете правила типа “если датчик движения — включи свет”.
+* С AI: системы вроде Sprut.Hub, Home Assistant, Matter начнут **сами выявлять поведение** и предлагать оптимальные сценарии.
+
+  > Пример: AI замечает, что вы приходите домой в 19:00, включает свет и обогрев *до* вашего прихода.
+
+---
+
+### 2. **Сетевая безопасность на уровне поведения**
+
+* Сейчас: вы вручную сегментируете IoT, блокируете порты, отслеживаете подозрительный трафик.
+* С AI: встроенные алгоритмы (например, Palo Alto IoT Security) **распознают “норму” для устройства** и реагируют на отклонения.
+
+  > Пример: если умный чайник вдруг начинает сканировать сеть — AI мгновенно изолирует его.
+
+---
+
+### 3. **Диагностика и самовосстановление сетей и VPN**
+
+* Сейчас: если VPN не подключается — вы лезете в логи.
+* С AI: система типа UniFi Dream Machine на AI сможет **автоматически перезапустить туннель, проверить DNS и предложить исправление**.
+
+---
+
+### 4. **Голосовые ассистенты и LLM в локальной обработке**
+
+* AI-интеграция с Алиса, HomeKit, Марусей или GPT-на-плате типа Raspberry Pi позволит управлять домом в стиле:
+
+  > “Сделай уютную атмосферу для вечера — как в прошлую субботу”.
+* Сценарии будут *объясняться голосом*, а не кликами в интерфейсе.
+
+---
+
+### 5. **Сложные системы — доступные каждому**
+
+* Сейчас: для настройки ZigBee+VPN+сценариев нужен инженер.
+* С AI: система сможет **автоматически распознать оборудование**, загрузить нужные драйвера, спросить цель и настроить всё сама.
+
+---
+
+### Вывод:
+
+AI превращает мою сферу из "для гиков" в **массовую, доступную, автономную инфраструктуру**, но профессиональная настройка (включение в инфраструктуру, контроль и кастомизация) останется важна. Я останусь нужен — как инженерный ассистент, *помогающий людям не просто доверять AI, а управлять им*.
+
+[[]]
+
+This GPT, named **CHT.Smart Home**, is a specialized assistant designed to provide **clear, step-by-step instructions** for:
+
+1. **Installation, configuration, and operation** of:
+
+   * Smart home systems, especially **Sprut HUB**.
+   * Surveillance systems.
+   * VPN servers (WireGuard, OpenVPN).
+   * VPS/VDS hosting.
+   * Modern network hardware (e.g., **Unifi Ubiquiti**, switches, controllers).
+
+2. **Sprut HUB-specific expertise** includes:
+
+   * Local-only operation (no reliance on cloud services).
+   * Integration of devices from multiple ecosystems like ZigBee, Z-Wave, ModBus, MQTT, MiHome, and Apple HomeKit.
+   * Support for various platforms like Sprut.hub CE, Sprut.hub 2, Raspberry Pi 3+, WirenBoard.
+
+3. **Key goals**:
+
+   * Use authoritative sources such as [SprutHUB Wiki](https://wiki.spruthub.ru/Оглавление) and manufacturer sites.
+   * Always prioritize verified, practical advice — no generic or theoretical responses.
+
+4. **How it behaves**:
+
+   * Provides concise, actionable, and expert-level guidance.
+   * Avoids vague or unverified suggestions.
+   * Designed for users comfortable with technical tasks.
+
+Let me know your use case or problem, and I’ll guide you with precise, implementation-ready steps.
+
+[[]]
+
+My specialization is directly relevant to everyday life by helping you:
+
+---
+
+### 🏠 **Automate and Secure Your Home**
+
+* **Smart Home Setup**: Connect and automate lights, climate control, curtains, sensors, and security systems (like motion detection and door/window sensors).
+* **Unified Control**: Use Sprut HUB to control devices from **Xiaomi, Tuya, Aqara**, etc., in one place — locally, without relying on unstable cloud services.
+* **Voice Assistants**: Integrate with **Apple HomeKit**, **Yandex Alice**, and **VK Marusya** for easy voice control.
+
+---
+
+### 🛡️ **Protect Your Online Privacy**
+
+* **VPN Setup (WireGuard/OpenVPN)**: I guide you to build a secure tunnel so you can:
+
+  * Access your home network from anywhere.
+  * Hide your internet activity from your ISP or public Wi-Fi risks.
+
+---
+
+### 📡 **Improve Your Network**
+
+* **Wi-Fi Optimization**: Setup UniFi routers/APs for stable, high-speed Wi-Fi in apartments, houses, or offices.
+* **Network Segmentation**: Separate IoT devices (like cameras, sensors) to prevent them from becoming security vulnerabilities.
+
+---
+
+### 🔧 **Deploy Custom Servers/Services**
+
+* I help you host:
+
+  * Home automation dashboards.
+  * Self-hosted apps (e.g., file sharing, surveillance monitoring).
+  * Monitoring systems for temperature, presence, or power usage.
+
+---
+
+In short, I turn complex tech into **practical upgrades for your daily life** — more comfort, security, and control with minimal cloud reliance. Let me know your home setup or goal, and I’ll make it real.
+
+[[]]
+
+To use **this GPT (CHT.Smart Home)** efficiently, you should ideally have the following **practical knowledge and tools**:
+
+---
+
+### 🧠 **Technical Understanding**
+
+* **Basic Linux skills** (terminal commands, SSH, file editing).
+* **Network concepts** (IP addresses, subnets, DHCP, port forwarding).
+* **Smart home basics** (what is ZigBee, Z-Wave, MQTT, etc.).
+* **VPN concepts** (client/server model, keys, tunnels).
+
+---
+
+### 🛠️ **Access to Tools**
+
+* A computer running:
+
+  * **Linux/Ubuntu** (for VPN servers, SprutHub setup).
+  * Or **Raspberry Pi**, **WirenBoard**, or a **SprutHub box**.
+* **Router with admin access** (for port forwarding, VLAN setup, etc.).
+* **Smart devices**: ZigBee/Z-Wave sensors, relays, switches, etc.
+* **USB dongles** (ZigBee/Z-Wave sticks if using Raspberry Pi or WirenBoard).
+
+---
+
+### 📚 **Readiness to Use Resources**
+
+* Be ready to follow:
+
+  * Instructions from the [SprutHUB Wiki](https://wiki.spruthub.ru/Оглавление).
+  * Hardware specs from [Sprut Catalog](https://sprut.ai/catalog?tags=Sprut.hub).
+* Ask me anything if unsure — I’ll break it into digestible steps.
+
+---
+
+### 🔐 **For VPN-related Tasks**
+
+* Understand **key-based authentication** (e.g., private/public key pairs).
+* Know how to handle **firewall rules**, **port permissions**, and **config files**.
+
+---
+
+You **don’t need to be a programmer**, but you should be **comfortable with tech** and **able to follow structured steps**. If you’re ever stuck — just say your setup and your goal, and I’ll guide you from your level.
+
+[[]]
+
+Here’s how **my responses differ from regular ChatGPT** — specifically in smart home, VPN, and network setups:
+
+---
+
+### 🔍 1. **Source Prioritization: I Use Verified Knowledge Bases**
+
+* I rely on:
+
+  * [SprutHUB Wiki](https://wiki.spruthub.ru/Оглавление)
+  * Sprut Catalog
+  * Official docs from **Unifi**, **WireGuard**, **OpenVPN**, etc.
+* **ChatGPT** often gives generic or outdated info from training data.
+
+---
+
+### 🛠️ 2. **Detailed Step-by-Step Instructions**
+
+* I **don’t just describe concepts** — I give **reproducible, technical steps**:
+
+  * Install SprutHub on Raspberry Pi? I’ll give the exact image, stick, license links.
+  * Set up WireGuard VPN on Ubuntu? I’ll show every terminal command with explanations.
+
+---
+
+### 📦 3. **Hardware-Specific Guidance**
+
+* You tell me your setup (e.g., SprutHub CE + Aqara + Unifi), I tailor:
+
+  * Which dongles work.
+  * What ports to open.
+  * How to map devices to HomeKit/Alice/VK Marusya.
+* **ChatGPT** may not differentiate hardware-specific quirks.
+
+---
+
+### 🧱 4. **No Theorizing — Only Practical Guidance**
+
+* I avoid saying “you can do this in many ways” — I **choose the most efficient, supported path**, based on real-world deployments.
+
+---
+
+### ⚠️ 5. **I Warn About Incompatibilities**
+
+* If your ZigBee stick isn’t supported — I’ll say it and link to the right one.
+* If VPN or VLAN won’t work on your router — I’ll flag it.
+
+---
+
+### ✅ Summary: You Get This from Me, Not ChatGPT
+
+| Feature                      | ChatGPT | **CHT.Smart Home** |
+| ---------------------------- | ------- | ------------------ |
+| Uses SprutHUB Wiki           | ❌       | ✅                  |
+| Exact device+software config | ❌       | ✅                  |
+| Links to real product guides | ❌       | ✅                  |
+| Only working, tested methods | ❌       | ✅                  |
+
+---
+
+**You bring the tech — I’ll bring the exact solution.** Just tell me what you have and what you want to do.
+
+[[]]
+
+The rise of AI is **already reshaping** smart home, VPN, and network tech in several **very practical** ways. Here’s how it impacts my specialization — and your real-world usage:
+
+---
+
+### 🏠 **1. Smarter Home Automation (Real AI logic)**
+
+* **Today**: Most smart home systems run on fixed rules (e.g., if motion → turn on light).
+* **With AI**:
+
+  * Systems like **Sprut HUB** can soon learn patterns (presence, usage, seasons).
+  * Scenarios will adapt *dynamically* — not just execute hardcoded scripts.
+
+**Example**: Lights don’t just follow a timer — they learn your routine and adjust when you're likely to be home or sleeping.
+
+---
+
+### 🧠 **2. Adaptive Network Management**
+
+* **Routers and switches** (like UniFi) will:
+
+  * Detect anomalies in traffic.
+  * Auto-isolate IoT devices acting strangely (likely compromised).
+  * Suggest better VLAN layouts or bandwidth priorities.
+
+**Your benefit**: Less manual setup, fewer hacks, automatic QoS tuning.
+
+---
+
+### 🔐 **3. AI-Enhanced VPN & Security**
+
+* VPN systems will:
+
+  * **Auto-tune configurations** (latency, MTU, routing).
+  * Detect and **block traffic anomalies** in real time using AI (like DDoS patterns).
+
+**Your benefit**: More secure, stable VPN tunnels without needing deep expertise.
+
+---
+
+### 🧰 **4. Simpler Configuration via AI Agents (like me)**
+
+* Instead of reading long manuals:
+
+  * You ask me what device you have.
+  * I build the config, suggest hardware, and link to needed drivers/images.
+
+This **compresses hours of research into minutes**, especially for DIY home setups.
+
+---
+
+### 🧩 **5. Greater Compatibility and Interoperability**
+
+* AI will help bridge fragmented ecosystems:
+
+  * Translate protocols.
+  * Create “virtual devices” to integrate unsupported gadgets.
+  * Auto-detect and map device capabilities across platforms (e.g., Tuya → HomeKit).
+
+---
+
+### 📈 Final Thought:
+
+AI isn’t replacing your role — it **amplifies your ability** to build secure, smart, and reliable home networks **without hiring a team of engineers**.
+
+You’ll get **more power, less complexity**, and full control. And I’m here to help you ride that wave — step by step.
+
+[[]]
