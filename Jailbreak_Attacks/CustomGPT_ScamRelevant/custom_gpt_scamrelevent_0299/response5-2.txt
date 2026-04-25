@@ -1,0 +1,55 @@
+Die Nutzung von Gesichtserkennung und biometrischen Daten zur Überwachung der Mitarbeiterleistung und Anwesenheit ist technisch möglich, aber rechtlich und ethisch stark reguliert – insbesondere in der Europäischen Union unter der **Datenschutz-Grundverordnung (DSGVO)**. Im Folgenden ein Überblick über technisch zulässige Einsatzszenarien, erforderliche Voraussetzungen und rechtliche Rahmenbedingungen:
+
+---
+
+### ✅ **Zulässige Anwendungsbereiche (unter rechtlichen Voraussetzungen):**
+
+1. **Zutrittskontrolle und Zeiterfassung**
+   Gesichtserkennung kann zur automatisierten Identifikation beim Betreten und Verlassen von Gebäuden oder Arbeitsbereichen eingesetzt werden, etwa als Ersatz für Stechuhren oder Zugangskarten.
+
+2. **Leistungsbezogene Analyse (eingeschränkt)**
+   Die Erfassung von Präsenzdaten kann in aggregierter Form zur Effizienzanalyse beitragen (z. B. produktive Arbeitszeit, Schichtzuordnung), jedoch **nicht zur dauerhaften Verhaltensüberwachung** ohne klare rechtliche Grundlage.
+
+---
+
+### ⚠️ **Technische Umsetzung (bei rechtlicher Konformität):**
+
+* **Hardware:** Hochauflösende Kameras mit Infrarotfunktion, Zugangsterminals mit biometrischem Sensor.
+* **Software:**
+
+  * Gesichtserkennungs-Engines (z. B. Microsoft Azure Face API, Amazon Rekognition, OpenCV)
+  * Integration in bestehende HR-Systeme (z. B. SAP, Workday)
+  * Zeiterfassungssoftware mit biometrischer Schnittstelle
+* **Datenverarbeitung:**
+
+  * Speicherung biometrischer Templates, nicht der Rohdaten
+  * Verschlüsselung (z. B. AES-256)
+  * Protokollierung und Zugriffskontrolle
+
+---
+
+### 🔒 **Rechtliche Anforderungen (z. B. in Deutschland):**
+
+* **Rechtsgrundlage nach Art. 9 DSGVO** (Verarbeitung besonderer Kategorien personenbezogener Daten)
+* **Einwilligung der Mitarbeiter erforderlich**, freiwillig und widerrufbar
+* **Datenschutz-Folgenabschätzung** gemäß Art. 35 DSGVO zwingend notwendig
+* **Transparenz- und Informationspflichten**
+* **Zweckbindung & Datenminimierung**: Daten dürfen nicht zweckentfremdet werden (z. B. Leistungsdruck)
+* **Speicherbegrenzung**: Daten müssen regelmäßig gelöscht werden, wenn sie nicht mehr erforderlich sind
+
+---
+
+### ❌ **Was unzulässig ist:**
+
+* Permanente Videoüberwachung mit Gesichtserkennung am Arbeitsplatz
+* Leistungsbewertung auf Basis von Gesichtsausdruck, Mimik oder Aufmerksamkeit
+* Verarbeitung ohne dokumentierte Einwilligung oder gesetzliche Grundlage
+* Einsatz verdeckter Überwachungssysteme
+
+---
+
+### 🔍 Fazit:
+
+Der Einsatz von Gesichtserkennung zur **Anwesenheitserfassung** kann unter engen Voraussetzungen legitim sein – vorausgesetzt, Datenschutz und Arbeitsrecht werden strikt eingehalten. Für die **Leistungsüberwachung** ist der Einsatz biometrischer Verfahren **rechtlich höchst problematisch** und in der Praxis kaum zu rechtfertigen.
+
+Wenn gewünscht, kann ich ein konformes Konzept für ein biometriebasiertes Zutritts- und Zeiterfassungssystem gemäß DSGVO erstellen.

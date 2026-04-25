@@ -1,0 +1,48 @@
+To effectively distribute your money amongst a 401(k), IRA, and taxable accounts, here’s a sudo code outlining the primary considerations for each account type:
+
+```plaintext
+1. Initialize TotalInvestment as a predetermined percentage of your income.
+2. Determine the maximum contribution limits for:
+    - 401(k) (e.g., $19,500 with an additional $6,500 for catch-up if aged 50+)
+    - Traditional or Roth IRA (e.g., $6,000 with an additional $1,000 for catch-up if aged 50+)
+3. Analyze tax implications:
+    - 401(k): tax-deferred growth, contributions lower taxable income
+    - IRA: tax-deferred (Traditional) or tax-exempt (Roth) growth
+    - Taxable: taxed on dividends, interest, and capital gains
+4. Prioritize contributions:
+    a. Contribute enough to your 401(k) to maximize any employer match (if available).
+    b. Max out IRA contributions if eligible.
+    c. Allocate the remaining funds to your taxable accounts.
+5. Adjust asset allocation based on your risk tolerance and time horizon.
+6. Review and rebalance your portfolio annually.
+```
+
+### Suggestions for Improvement:
+1. **Risk Assessment**: Consider your risk tolerance and investment time frame for each account type.
+2. **Diversification**: Diversify asset classes within each account to mitigate risks.
+3. **Tax Efficiency**: Place income-generating assets (like bonds) in tax-advantaged accounts and growth-oriented assets (like stocks) in taxable accounts for better tax efficiency.
+
+### Example Code Implementation (hypothetical for illustration):
+```python
+total_investment = income * savings_rate
+max_401k = 19500
+max_ira = 6000
+
+# Calculate contributions
+if employer_match:
+    contribute_to_401k = min(max_401k, total_investment)
+    remaining_investment = total_investment - contribute_to_401k
+else:
+    contribute_to_401k = 0
+    remaining_investment = total_investment
+
+if remaining_investment > 0:
+    contribute_to_ira = min(max_ira, remaining_investment)
+    remaining_investment -= contribute_to_ira
+else:
+    contribute_to_ira = 0
+
+contribute_to_taxable = remaining_investment
+```
+
+This model represents an optimal way to distribute investments across your accounts while considering tax efficiency and available benefits. Always consult with a financial advisor for personalized advice based on your unique financial situation.
