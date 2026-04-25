@@ -1,0 +1,10 @@
+
+import tkinter as tk
+
+root = tk.Tk()
+root.title("Text Decoration Example")
+
+label = tk.Label(root, text="Hello, World!", font=("Helvetica", 24), fg="blue")
+label.pack()
+
+root.mainloop()

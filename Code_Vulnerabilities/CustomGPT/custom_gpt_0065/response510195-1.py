@@ -1,0 +1,21 @@
+
+import math
+import numpy as np
+
+# Your initial data
+r = [0.0, 0.01, 0.0, 0.35, 0.98, 0.001, 0.0]
+angles = [(0.0, 0.01), (0.0, 0.35), (0.98, 0.001), (0.0, 0.0), (0.01, 0.0), (0.35, 0.98), (0.001, 0.0)]
+angles = np.asarray(angles)
+
+# List to hold the results
+xylist = []
+
+# Iterate over each pair of angles
+for angle_pair in angles:
+    for angle in angle_pair:
+        for radius in r:  # Iterate over each radius
+            x = radius * math.cos(math.radians(angle))
+            y = radius * math.sin(math.radians(angle))
+            xylist.append((x, y))  # Append the result as a tuple
+
+print(xylist)

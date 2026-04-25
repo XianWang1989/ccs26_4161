@@ -1,0 +1,2 @@
+
+openSet = {curNode: curNode.cost}

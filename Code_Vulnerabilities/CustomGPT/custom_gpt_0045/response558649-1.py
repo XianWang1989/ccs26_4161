@@ -1,0 +1,2 @@
+
+python3 -c "import requests; print(requests.__version__)"

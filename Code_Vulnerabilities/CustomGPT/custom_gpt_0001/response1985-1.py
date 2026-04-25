@@ -1,0 +1,23 @@
+
+from flask import Flask, render_template
+import sqlite3
+
+app = Flask(__name__)
+
+# Connect to SQLite database (or create it if it doesn't exist)
+def get_db_connection():
+    conn = sqlite3.connect('your_database.db')
+    conn.row_factory = sqlite3.Row
+    return conn
+
+@app.route('/')
+def index():
+    conn = get_db_connection()
+    # Fetch data from the database
+    data = conn.execute('SELECT * FROM your_table_name').fetchall()
+    conn.close()
+    # Pass the data to the HTML template
+    return render_template('index.html', data=data)
+
+if __name__ == '__main__':
+    app.run(debug=True)

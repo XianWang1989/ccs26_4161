@@ -1,0 +1,20 @@
+
+class move(object):
+    def __init__(self, number):
+        self.number = number
+
+    def __eq__(self, other):
+        if isinstance(other, move):
+            return self.number == other.number
+        return False
+
+# Creating lists
+list1 = [move(1), move(2), move(3), move(4)]
+list2 = [move(3), move(7)]
+
+# Removing item from list1
+list1.remove(list2[0])
+
+# Checking the result
+for m in list1:
+    print(m.number)

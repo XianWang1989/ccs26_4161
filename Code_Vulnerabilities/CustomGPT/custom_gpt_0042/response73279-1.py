@@ -1,0 +1,32 @@
+
+def get_valid_date():
+    while True:
+        year = input("Please enter the year you were born: ")
+        month = input("Please enter the month you were born: ")
+        day = input("Please enter the day you were born: ")
+
+        month = int(month)
+        day = int(day)
+
+        # Validate month and day
+        if month == 2 and day <= 29:  # February
+            break
+        elif month in {1, 3, 5, 7, 8, 10, 12} and day <= 31:  # Months with 31 days
+            break
+        elif month in {4, 6, 9, 11} and day <= 30:  # Months with 30 days
+            break
+        else:
+            print("Please enter a valid date.")
+
+    return year, month, day
+
+def sum_digits(value):
+    while value >= 10:
+        value = sum(int(num) for num in str(value))
+    return value
+
+year, month, day = get_valid_date()
+
+# Calculate digit sum
+sum_year = sum_digits(int(year))
+print(f"The final digit sum of your birth year is: {sum_year}")

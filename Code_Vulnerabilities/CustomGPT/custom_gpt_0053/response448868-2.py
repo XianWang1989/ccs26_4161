@@ -1,0 +1,4 @@
+
+# Contents of C:/Users/.../Documents/maya/2014-x64/scripts/swap.py
+def printSomething():
+    print("Something!")

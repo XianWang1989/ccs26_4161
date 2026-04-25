@@ -1,0 +1,44 @@
+
+import random
+import math
+
+w, h = 9, 10
+network = [[0 for x in range(w)] for y in range(h)]
+
+def sigmoid(sigin):
+    return 1 / (1 + math.exp(-sigin))
+
+def netcal(x):
+    network[x].append(sigmoid((sigmoid(i1*network[x][0]+i2*network[x][1])*network[x][6]) +
+                               (sigmoid(i1*network[x][2]+i2*network[x][3])*network[x][7]) +
+                               (sigmoid(i1*network[x][4]+i2*network[x][5])*network[x][8])))
+
+def seed():
+    for b in range(10):
+        for y in range(9):
+            network[b][y] = random.random()
+
+def calall():
+    for c in range(9):
+        netcal(c)
+        print(network[c][9])
+
+def cost():
+    for d in range(9):
+        network[d].append(1 - network[d][9])  # Assuming 1 - output is your cost
+        print(network[d][10])
+
+def sort_network():
+    global network  # Ensure you're modifying the global variable
+    network = sorted(network, key=lambda x: x[10])  # Sort in place
+
+# Initialize input coefficients
+i1 = 0
+i2 = 1
+
+seed()
+calall()
+print("break")
+cost()
+sort_network()  # Call the sort function
+print(network)

@@ -1,0 +1,5 @@
+
+class BusinessDetailsForm(forms.ModelForm):
+    class Meta:
+        model = YourBusinessModel  # Replace with your actual model
+        fields = ['business_name', 'address']  # Add your fields here

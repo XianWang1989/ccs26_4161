@@ -1,0 +1,9 @@
+
+try:
+    result = 10 / 0  # This will raise a ZeroDivisionError
+except Exception as e:
+    print("An error occurred:", e)
+else:
+    print("No errors! Result is:", result)
+finally:
+    print("This message always prints, regardless of errors.")

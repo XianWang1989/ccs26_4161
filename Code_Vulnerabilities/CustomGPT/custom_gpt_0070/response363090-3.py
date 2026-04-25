@@ -1,0 +1,6 @@
+
+create_regex_function()
+entrance_registers = EntranceRegister.objects.raw(
+    "SELECT * FROM porter_entranceregister WHERE authorized_requests REGEXP %s",
+    [REGEX_ENTRANCE]
+)

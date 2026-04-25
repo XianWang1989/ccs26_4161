@@ -1,0 +1,3 @@
+
+class SlotMap:
+    # Class implementation

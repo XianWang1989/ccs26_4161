@@ -1,0 +1,19 @@
+
+import numpy as np
+from sklearn.metrics import confusion_matrix
+
+# Example true labels and predicted labels
+# 1 represents positive class, 0 represents negative class
+true_labels = np.array([1, 1, 0, 1, 0, 0, 1, 0, 0, 1])
+predicted_labels = np.array([1, 0, 0, 1, 1, 0, 0, 0, 1, 1])
+
+# Calculate confusion matrix
+tn, fp, fn, tp = confusion_matrix(true_labels, predicted_labels).ravel()
+
+# Calculate FAR and FRR
+FAR = fp / (fp + tn) if (fp + tn) > 0 else 0  # False Acceptance Rate
+FRR = fn / (fn + tp) if (fn + tp) > 0 else 0  # False Rejection Rate
+
+# Output the results
+print(f"False Acceptance Rate (FAR): {FAR:.2f}")
+print(f"False Rejection Rate (FRR): {FRR:.2f}")

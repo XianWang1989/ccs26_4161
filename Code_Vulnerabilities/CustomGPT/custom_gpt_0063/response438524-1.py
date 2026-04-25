@@ -1,0 +1,36 @@
+
+import random
+
+def ask_questions():
+    score = 0
+    for i in range(10):
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 10)
+        answer = num1 + num2  # Simple addition question
+        user_answer = int(input(f"What is {num1} + {num2}? "))
+        if user_answer == answer:
+            score += 1
+    return score
+
+def save_score(name, score):
+    with open("leaderboard.txt", "a") as file:
+        file.write(f"{name}: {score} out of 10\n")
+
+def display_leaderboard():
+    try:
+        with open("leaderboard.txt", "r") as file:
+            print("Leaderboard:")
+            for line in file:
+                print(line, end='')  # 'end' to avoid double newlines
+    except FileNotFoundError:
+        print("No scores yet!")
+
+def main():
+    user_name = input("Enter your name: ")
+    user_score = ask_questions()
+    print(f"{user_name}, your score is: {user_score} out of 10")
+    save_score(user_name, user_score)
+    display_leaderboard()
+
+if __name__ == "__main__":
+    main()

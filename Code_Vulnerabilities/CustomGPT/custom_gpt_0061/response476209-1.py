@@ -1,0 +1,4 @@
+
+# Instead of two separate labels, use a single label for left/right control:
+label_lr:
+-> number N x 1 integer number (0 for left, 1 for right, 2 for none)

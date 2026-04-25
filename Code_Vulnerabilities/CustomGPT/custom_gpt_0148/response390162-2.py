@@ -1,0 +1,2 @@
+
+ACTION: {<VBD|VBN|VBP> <NP>} 

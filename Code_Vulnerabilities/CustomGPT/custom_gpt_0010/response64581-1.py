@@ -1,0 +1,5 @@
+
+# In shastra/models.py
+
+class FbApiContent(models.Model):
+    content = models.ForeignKey('shastra.Shastra', on_delete=models.CASCADE)

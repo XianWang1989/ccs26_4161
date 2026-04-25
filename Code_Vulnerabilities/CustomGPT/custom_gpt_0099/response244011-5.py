@@ -1,0 +1,6 @@
+
+'handlers': {
+    'console': {
+        'class': 'logging.StreamHandler',
+    },
+},

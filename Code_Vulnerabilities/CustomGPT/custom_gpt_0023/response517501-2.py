@@ -1,0 +1,6 @@
+
+MIDDLEWARE = [
+    ...
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    ...
+]

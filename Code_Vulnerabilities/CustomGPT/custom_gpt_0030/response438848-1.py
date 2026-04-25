@@ -1,0 +1,11 @@
+
+import numpy as np
+
+# Create a random matrix of size 3000000x50
+data = np.random.randn(3000000, 50)
+
+# Reshape the data into 300 matrices of size 10000x50
+reshaped_data = data.reshape(300, 10000, 50)
+
+# Verify the shape of the new array
+print(reshaped_data.shape)  # Output should be (300, 10000, 50)

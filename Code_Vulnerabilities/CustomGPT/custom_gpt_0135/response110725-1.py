@@ -1,0 +1,26 @@
+
+# Example dictionary (similar to your obj_1)
+obj_1 = {
+    u'd': {
+        u'results': [
+            {u'Desc': u'This is a description...',
+             u'Title': u'This is a title...',
+             u'data': {u'Url': u'www.site.com'}},
+
+            {u'Desc': u'This is a description...',
+             u'Title': u'This is another title...',
+             u'data': {u'Url': u'www.another-site.com'}}
+        ]
+    }
+}
+
+# Extracting Title and Url values
+titles_urls = []
+for result in obj_1[u'd'][u'results']:
+    title = result[u'Title']
+    url = result[u'data'][u'Url']
+    titles_urls.append((title, url))
+
+# Print the extracted values
+for title, url in titles_urls:
+    print(f'Title: {title}, URL: {url}')

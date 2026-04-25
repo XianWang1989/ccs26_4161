@@ -1,0 +1,14 @@
+
+from allauth.account.forms import SignupForm
+
+class CustomSignupForm(SignupForm):
+    user_type = forms.ChoiceField(choices=[
+        ('architect', 'Architect'),
+        ('client', 'Client'),
+    ])
+
+    def save(self, request):
+        user = super(CustomSignupForm, self).save(request)
+        user.user_type = self.cleaned_data['user_type']
+        user.save()
+        return user

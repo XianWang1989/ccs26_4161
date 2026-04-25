@@ -1,0 +1,35 @@
+
+import random
+
+# Function to ask questions
+def ask_questions():
+    score = 0
+    for _ in range(10):
+        num1 = random.randint(1, 10)
+        num2 = random.randint(1, 10)
+        answer = int(input(f"What is {num1} + {num2}? "))
+        if answer == num1 + num2:
+            score += 1
+    return score
+
+# Function to save score to leaderboard
+def save_score(name, score):
+    with open("leaderboard.txt", "a") as file:
+        file.write(f"{name}: {score} out of 10\n")
+
+# Function to print leaderboard
+def print_leaderboard():
+    try:
+        with open("leaderboard.txt", "r") as file:
+            print(file.read())
+    except FileNotFoundError:
+        print("No scores available yet.")
+
+# Main program
+name = input("Enter your name: ")
+score = ask_questions()
+save_score(name, score)
+print_leaderboard()
+
+# Bonus: Printing without spaces
+print("Score saved! Name:", name, ":", score, "out of 10", sep='')

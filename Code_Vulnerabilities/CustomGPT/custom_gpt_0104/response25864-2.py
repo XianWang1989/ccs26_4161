@@ -1,0 +1,30 @@
+
+class AppRouter:
+    """
+    A router to control all database operations on models in
+    the App1 and App2 applications.
+    """
+
+    def db_for_read(self, model, **hints):
+        """Point read operations to the appropriate database."""
+        if model._meta.app_label == 'app1':
+            return 'DB1'
+        elif model._meta.app_label == 'app2':
+            return 'DB2'
+        return None
+
+    def db_for_write(self, model, **hints):
+        """Point write operations to the appropriate database."""
+        if model._meta.app_label == 'app1':
+            return 'DB1'
+        elif model._meta.app_label == 'app2':
+            return 'DB2'
+        return None
+
+    def allow_migrate(self, db, app_label, model_name=None, **hints):
+        """Make sure the right app only appears in the appropriate database."""
+        if app_label == 'app1':
+            return db == 'DB1'
+        elif app_label == 'app2':
+            return db == 'DB2'
+        return None

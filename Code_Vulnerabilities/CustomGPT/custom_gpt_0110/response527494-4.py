@@ -1,0 +1,2 @@
+
+POSTMAN_AUTO_COMPILE = True

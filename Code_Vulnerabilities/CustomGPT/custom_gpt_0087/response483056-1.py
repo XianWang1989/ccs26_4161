@@ -1,0 +1,29 @@
+
+def cocktail_sort(aList):
+    start = 0
+    end = len(aList) - 1
+    f = 1
+
+    while start < end:
+        # Forward pass
+        if f == 1:
+            for i in range(start, end):
+                if aList[i] > aList[i + 1]:
+                    aList[i], aList[i + 1] = aList[i + 1], aList[i]  # Swap
+            end -= 1
+            f = -1  # Change direction
+
+        # Backward pass
+        elif f == -1:
+            for i in range(end, start, -1):
+                if aList[i] < aList[i - 1]:
+                    aList[i], aList[i - 1] = aList[i - 1], aList[i]  # Swap
+            start += 1
+            f = 1  # Change direction
+
+    return aList
+
+# Example usage
+aList = [5, 2, 3, 6, 1]
+sorted_list = cocktail_sort(aList)
+print(sorted_list)  # Output: [1, 2, 3, 5, 6]

@@ -1,0 +1,33 @@
+
+def get_birthdate():
+    while True:
+        year = input("Please enter the year you were born: ")
+        month = input("Please enter the month you were born: ")
+        day = input("Please enter the day you were born: ")
+
+        if int(month) == 2 and int(day) <= 29:
+            break
+        elif int(month) in {1, 3, 5, 7, 8, 10, 12} and int(day) <= 31:
+            break
+        elif int(month) in {4, 6, 9, 11} and int(day) <= 30:
+            break
+        else:
+            print("Please enter a valid input")
+
+    return year
+
+def digit_sum(n):
+    sum_digits = sum(int(digit) for digit in str(n))
+    return sum_digits
+
+def process_year(year):
+    sum_year = int(year)
+
+    while sum_year >= 10:
+        sum_year = digit_sum(sum_year)
+
+    return sum_year
+
+year = get_birthdate()
+final_sum = process_year(year)
+print("Final sum of the year digits:", final_sum)

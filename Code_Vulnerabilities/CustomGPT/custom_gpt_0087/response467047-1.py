@@ -1,0 +1,42 @@
+
+import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import VotingClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+
+# Generate sample datasets (replace these with your actual datasets)
+X1, y1 = make_classification(n_samples=100, n_features=20, random_state=1)
+X2, y2 = make_classification(n_samples=100, n_features=20, random_state=2)
+X3, y3 = make_classification(n_samples=100, n_features=20, random_state=3)
+
+# Split datasets into training and testing
+X_train1, X_test1, y_train1, y_test1 = train_test_split(X1, y1, test_size=0.2, random_state=1)
+X_train2, X_test2, y_train2, y_test2 = train_test_split(X2, y2, test_size=0.2, random_state=2)
+X_train3, X_test3, y_train3, y_test3 = train_test_split(X3, y3, test_size=0.2, random_state=3)
+
+# Initialize classifiers for each dataset
+clf1 = DecisionTreeClassifier(random_state=1)
+clf2 = SVC(probability=True, random_state=2)  # SVC requires probability=True for voting
+clf3 = LogisticRegression(random_state=3)
+
+# Fit classifiers on their respective training sets
+clf1.fit(X_train1, y_train1)
+clf2.fit(X_train2, y_train2)
+clf3.fit(X_train3, y_train3)
+
+# Create the voting ensemble
+voting_clf = VotingClassifier(estimators=[
+    ('dt', clf1),
+    ('svc', clf2),
+    ('lr', clf3)],
+    voting='soft')  # Use 'soft' voting to combine predicted probabilities
+
+# Fit the ensemble on the first dataset (you can choose any dataset)
+voting_clf.fit(X_train1, y_train1)
+
+# Evaluate on the test set of the first dataset
+accuracy = voting_clf.score(X_test1, y_test1)
+print(f'Ensemble accuracy on test set 1: {accuracy:.2f}')

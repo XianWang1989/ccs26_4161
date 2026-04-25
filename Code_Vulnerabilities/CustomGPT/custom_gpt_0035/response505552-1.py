@@ -1,0 +1,9 @@
+
+msg = input("Message? ")
+result = []
+
+for i in range(0, len(msg), 3):
+    result.append(msg[i])
+
+# Join the collected letters with a space and print
+print(" ".join(result))

@@ -1,0 +1,2 @@
+
+DIRECTED: {<VBD|VBN> directed} 

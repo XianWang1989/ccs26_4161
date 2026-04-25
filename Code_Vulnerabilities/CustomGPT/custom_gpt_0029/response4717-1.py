@@ -1,0 +1,11 @@
+
+# Open the file in read mode
+with open('reg.fa', 'r') as fh:
+    # Initialize an empty string to store lines
+    s = ''
+    # Read the file line by line
+    for line in fh:
+        # Remove newline characters and concatenate
+        s += line.strip()
+
+print(s)

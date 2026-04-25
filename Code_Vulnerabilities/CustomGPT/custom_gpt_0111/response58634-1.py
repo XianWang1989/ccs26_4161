@@ -1,0 +1,7 @@
+
+values = [['1', '2', '3'], ['4', '5'], ['6', '7', '8', '9']]
+
+# Convert all strings to integers using a nested list comprehension
+newVals = [int(x) for row in values for x in row]
+
+print(newVals)

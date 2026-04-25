@@ -1,0 +1,2 @@
+
+tfactory = TTransport.TFramedTransportFactory()

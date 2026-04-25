@@ -1,0 +1,18 @@
+
+# Example dictionary
+obj_1 = {
+    u'd': {
+        u'results': [
+            {u'Desc': u'This is a description...', u'Title': u'Title 1', u'data': {u'Url': u'www.site1.com'}},
+            {u'Desc': u'This is a description...', u'Title': u'Title 2', u'data': {u'Url': u'www.site2.com'}}
+        ]
+    }
+}
+
+# Extracting Title and URL values
+titles = [result[u'Title'] for result in obj_1[u'd'][u'results']]
+urls = [result[u'data'][u'Url'] for result in obj_1[u'd'][u'results']]
+
+# Printing output
+print("Titles:", titles)
+print("URLs:", urls)

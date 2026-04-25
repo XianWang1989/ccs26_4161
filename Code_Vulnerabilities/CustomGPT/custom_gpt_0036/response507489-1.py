@@ -1,0 +1,26 @@
+
+from django.views.generic.edit import FormView
+from django.urls import reverse
+from myapp.forms import MyFormClass  # Assuming you have a form class defined here
+
+class FormViewA(FormView):
+    form_class = MyFormClass
+    template_name = 'mytemplate.html'
+
+    def get_success_url(self):
+        return reverse('my_url')
+
+    def form_valid(self, form):
+        form.save()  # Save the form
+        print("in FormViewA")  # Output from FormViewA
+        return super(FormViewA, self).form_valid(form)  # Call the parent form_valid
+
+class FormViewB(FormViewA):
+    def form_valid(self, form):
+        form.save()  # Save the form again, if needed
+        print("in FormViewB")  # Output from FormViewB
+        return super(FormViewB, self).form_valid(form)  # Also call the parent method
+
+# Example Usage
+# Assuming you're using Django and have set up URLs to use FormViewB, 
+# you would see the output when the form is submitted successfully.

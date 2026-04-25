@@ -1,0 +1,38 @@
+
+import sys
+import csv
+
+def construct_line(label, line):
+    new_line = []
+    new_line.append(label)
+
+    for i, item in enumerate(line):
+        if item == '' or float(item) == 0.0:
+            continue
+        new_item = f"{i + 1}:{item}"
+        new_line.append(new_item)
+
+    return " ".join(new_line) + "\n"
+
+def main(input_file, output_file, label_index=0, skip_headers=0):
+    with open(input_file, 'r', newline='') as i, open(output_file, 'w', newline='') as o:
+        reader = csv.reader(i)
+
+        if skip_headers:
+            next(reader)  # Skip header
+
+        for line in reader:
+            # If label_index is -1, default label can be set (such as '1')
+            label = '1' if label_index == -1 else line.pop(label_index)
+            new_line = construct_line(label, line)
+            o.write(new_line)
+
+if __name__ == "__main__":
+    input_file = sys.argv[1]
+    output_file = sys.argv[2]
+
+    # Optionally capture label_index and skip_headers
+    label_index = int(sys.argv[3]) if len(sys.argv) > 3 else 0
+    skip_headers = int(sys.argv[4]) if len(sys.argv) > 4 else 0
+
+    main(input_file, output_file, label_index, skip_headers)

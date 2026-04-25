@@ -1,0 +1,2 @@
+
+print(app.config['DATABASE'])

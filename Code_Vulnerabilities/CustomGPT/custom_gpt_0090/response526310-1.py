@@ -1,0 +1,7 @@
+
+def get_setting():
+    for func in (foo, bar, baz):
+        var = func()
+        if var:
+            return var
+    return None  # Or some default value if all checks fail

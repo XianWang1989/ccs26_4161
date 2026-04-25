@@ -1,0 +1,50 @@
+
+import xml.etree.ElementTree as ET
+
+# Example response data from a SOAP call
+response_data = [
+    {
+        "Id": 1,
+        "Title": "notification 1",
+        "Message": "bla bla.",
+        "Published": "2000-01-01T00:00:00"
+    },
+    {
+        "Id": 2,
+        "Title": "notification 2",
+        "Message": "bla bla.",
+        "Published": "2000-01-01T00:00:00"
+    }
+]
+
+# Create the root SOAP Envelope
+envelope = ET.Element("soap:Envelope", {
+    "xmlns:soap": "http://schemas.xmlsoap.org/soap/envelope/",
+    "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "xmlns:xsd": "http://www.w3.org/2001/XMLSchema"
+})
+
+# Create the Body element
+body = ET.SubElement(envelope, "soap:Body")
+
+# Create the GetNotificationsResponse element
+response = ET.SubElement(body, "GetNotificationsResponse", {
+    "xmlns": "http://localhost/WS.asmx"
+})
+
+# Create the GetNotificationsResult element
+result = ET.SubElement(response, "GetNotificationsResult")
+
+# Add each NotificationData element
+for notification in response_data:
+    notification_elem = ET.SubElement(result, "NotificationData")
+    ET.SubElement(notification_elem, "Id").text = str(notification["Id"])
+    ET.SubElement(notification_elem, "Title").text = notification["Title"]
+    ET.SubElement(notification_elem, "Message").text = notification["Message"]
+    ET.SubElement(notification_elem, "Published").text = notification["Published"]
+
+# Generate the XML string
+xml_str = ET.tostring(envelope, encoding='utf-8', xml_declaration=True).decode('utf-8')
+
+# Print the resulting XML
+print(xml_str)

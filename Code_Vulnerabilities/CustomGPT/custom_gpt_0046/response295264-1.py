@@ -1,0 +1,32 @@
+
+class User:
+    def __init__(self, title):
+        self.title = title  # Fixed typo: 'tile' should be 'title'
+        self.cards = {}     # Initialize 'cards' dictionary
+
+    def addCard(self, compID, number):
+        if compID in self.cards and number > self.cards[compID]:
+            self.cards[compID] = number
+        elif compID not in self.cards:
+            self.cards[compID] = number   
+
+    def __str__(self):
+        card_list = []
+        for compID, number in self.cards.items():
+            final = f"{compID}-{number}"  # Format the output correctly
+            card_list.append(final)
+        card_list.sort()
+        # Join the list into a string without quotes
+        return f"{self.title}: Card scores: [ {', '.join(card_list)} ]"
+
+# Example usage
+user1 = User("Cpt.Fred")
+user1.addCard("diamond", 22)
+user1.addCard("hearts", 4)
+user1.addCard("spades", 3)
+
+user2 = User("Lt.Connor")
+user2.addCard("diamond", 43)
+
+print(user1)  # Output: Cpt.Fred: Card scores: [ diamond-22, hearts-4, spades-3 ]
+print(user2)  # Output: Lt.Connor: Card scores: [ diamond-43 ]

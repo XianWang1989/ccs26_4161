@@ -1,0 +1,6 @@
+
+INSTALLED_APPS = [
+    ...
+    'tribes',  # Add this line if not present
+    ...
+]

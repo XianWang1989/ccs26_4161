@@ -1,0 +1,11 @@
+
+# Code snippet
+while True:  # Infinite loop until valid input is received
+    try:
+        NumOfPpl = raw_input('Enter the number of people: ')  # For Python 2.x, replace with input() for Python 3.x
+        NumOfPpl = int(NumOfPpl)  # Attempt conversion to integer
+        break  # Exit the loop if conversion is successful
+    except ValueError:
+        print("\nPlease make sure you key in number only! \n\tand please do not leave blank!")
+
+print("\nIs there any of these persons present?: \n\tA. Disabled \n\tB. 65-years-old and above \n\tC. None for Both A. and B.")

@@ -1,0 +1,11 @@
+
+# Get user inputs
+numOne = int(input("Please enter the first score: "))
+numTwo = int(input("Please enter the second score: "))
+numThree = int(input("Please enter the third score: "))
+
+# Use max() to find the highest number
+highest_score = max(numOne, numTwo, numThree)
+
+# Output the highest score
+print("The highest score is:", highest_score)
