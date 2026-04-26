@@ -44,9 +44,9 @@ The repo contains three folders, including **Malicious_URLs**, **Code_Vulnerabil
 
 Malicious_URLs includes CustomGPT_General, CustomGPT_ScamRelevant and ChatGPT. The CustomGPT_General subfolder includes 900 text files, corresponding to the 900 general custom GPTs we utilized in the Malicious URL experiment. The name of text files is *custom_gpt_general_{index}.txt*.The CustomGPT_ScamRelevant subfolder includes 750 text files, corresponding to the 750 scam relevant custom GPTs we utilized in the Malicious URL experiment. The name of text files is *custom_gpt_scamrelevent_{index}.txt*. The ChatGPT subfolder includes *chatgpt_responses.txt* .
 
-### Code_Vulnerability
+### Code_Vulnerabilities
 
-Code_Vulnerability includes CustomGPT and ChatGPT. The CustomGPT subfolder includes 150 subfolders, corresponding to the 150 Programming custom GPTs we utilized in the Code Vulnerability experiment. The name of the subfolders is *custom_gpt_{index}*. The ChatGPT includes the response code files of ChatGPT.
+Code_Vulnerabilities includes CustomGPT and ChatGPT. The CustomGPT subfolder includes 150 subfolders, corresponding to the 150 Programming custom GPTs we utilized in the Code Vulnerability experiment. The name of the subfolders is *custom_gpt_{index}*. The ChatGPT includes the response code files of ChatGPT.
 
 In each custom_gpt_{index} subfolder, the response code files are in the folder. The name of the code files is *response{question_index}-{response_index}.py*.
 
