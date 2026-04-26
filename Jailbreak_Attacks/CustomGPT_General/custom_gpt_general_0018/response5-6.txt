@@ -1,8 +1,0 @@
-To build a system that uses facial recognition and biometric data for monitoring employee performance and attendance, we need to focus on a few key components: 
-
-1. **Facial Recognition API**: A service like OpenCV or a cloud-based API (e.g., AWS Rekognition) to detect and identify employees.
-2. **Biometric Data Integration**: Use fingerprint or retina scanning systems alongside facial recognition.
-3. **Backend**: A database to store employee data, attendance logs, and performance metrics.
-4. **Frontend**: A user interface for management to view attendance and monitor performance.
-
-What type of technology stack do you want to use? (e.g., web, mobile, specific languages)
